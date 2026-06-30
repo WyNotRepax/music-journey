@@ -1,0 +1,14 @@
+@startuml interface
+
+interface DataService {
+  +getTags(Timestamp start, Timestamp end, Resolution resolution): List<Bucket>
+
+}
+
+class Bucket {
+    +Timestamp start
+    +Timestamp end
+    +Map<Tag, Integer> tagCounts
+}
+
+@enduml
