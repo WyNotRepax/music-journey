@@ -1,22 +1,31 @@
 "use client";
-import Image from "next/image";
+import TestChart from "@/components/TestChart";
+import UserInput from "@/components/UserInput";
+import { DataService, DataServiceContext } from "@/service/dataService";
+import { useUser } from "@/service/userService";
 import { useEffect, useState } from "react";
 
-
-
 export default function Home() {
-  const [data, setData] = useState(null);
+  const [user, setUser] = useUser();
+  const [dataService, setDataService] = useState<DataService | null>(null);
   useEffect(() => {
-    fetch("/api/test")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
-  }, []);
+    if (user) {
+      const createDataService = async () => {
+        setDataService(null);
+        const service = await DataService.create(user);
+        setDataService(service);
+      };
+      createDataService();
+    }
+  }, [user]);
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      ({data ? JSON.stringify(data) : "Loading..."})
-    </div>
+    <>
+      <UserInput value={user || ""} onChange={setUser} />
+      {JSON.stringify(dataService?.tracks.map((track) => track.date))}
+      <DataServiceContext.Provider value={dataService}>
+        <TestChart />
+      </DataServiceContext.Provider>
+    </>
   );
 }
