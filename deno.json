@@ -1,0 +1,35 @@
+{
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "dev": "deno task dev-functions & deno task dev-client",
+    "build": "deno run -A npm:vite build",
+    "preview": "deno run --env-file=.env.local -A npm:vite preview",
+    "supabase": "deno run -A npm:supabase",
+    "gentypes": "deno run -A npm:supabase gen types --local --lang typescript > supabase/types.ts",
+    "dev-functions": "deno run -A npm:supabase functions serve --env-file supabase/functions/.env.local",
+    "dev-client": "deno run --env-file=.env.local -A npm:vite "
+  },
+  "imports": {
+    "react": "npm:react@^18.3.1",
+    "react/jsx-runtime": "npm:react@^18.3.1/jsx-runtime",
+    "react-dom": "npm:react-dom@^18.3.1",
+    "react-dom/client": "npm:react-dom@^18.3.1/client",
+    "@types/react": "npm:@types/react@^18.3.3",
+    "@types/react-dom": "npm:@types/react-dom@^18.3.0",
+    "vite": "npm:vite@^5.4.0",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.0",
+    "shared/": "./shared/"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["npm:@types/react", "npm:@types/react-dom"],
+    "lib": ["dom", "dom.iterable", "deno.ns", "esnext"]
+  },
+  "fmt": {
+    "include": ["src/", "scripts/"]
+  },
+  "lint": {
+    "include": ["src/", "scripts/"]
+  }
+}

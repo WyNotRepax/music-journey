@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "zod": "jsr:@zod/zod"
+  },
+  "exports": {
+    "./User": "./User.ts"
+  }
+}
