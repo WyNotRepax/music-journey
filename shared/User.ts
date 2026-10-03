@@ -15,7 +15,10 @@ export type UserInfo = {
   url: string;
 };
 
-export const RefreshUserRequest = GetUserRequest;
-export type RefreshUserRequest = GetUserRequest;
+export const RefreshUserRequest = z.object({
+  name: z.string(),
+  full: z.stringbool().optional()
+});
+export type RefreshUserRequest = z.infer<typeof RefreshUserRequest>;
 
 export type RefreshUserResponse = ApiResponse<{ ok: true }>;

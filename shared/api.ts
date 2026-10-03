@@ -8,4 +8,7 @@ export type SuccessResponse<T> = {
 export type ErrorResponse = {
   data?: never;
   error: unknown;
+  cause?: unknown;
 };
+
+export type Resolution = "day" | "week" | "month";

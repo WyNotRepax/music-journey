@@ -1,0 +1,1 @@
+select plays.user, count(*) from plays group by plays.user;

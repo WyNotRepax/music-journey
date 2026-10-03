@@ -3,6 +3,7 @@
     "zod": "jsr:@zod/zod"
   },
   "exports": {
-    "./User": "./User.ts"
+    "./User": "./User.ts",
+    "./Database": "./Database.ts"
   }
 }

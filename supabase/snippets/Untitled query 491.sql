@@ -1,0 +1,1 @@
+SELECT date_trunc('day', TIMESTAMP '2026-09-30T17:43:55.267Z', 'Europe/Berlin');

@@ -1,0 +1,48 @@
+
+.graph-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.graph-controls input,
+.graph-controls button {
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+}
+
+.graph-controls input {
+  min-width: 12rem;
+}
+
+.graph-error {
+  color: #b42318;
+}
+
+.graph {
+  overflow: hidden;
+}
+.graph-time-axis {
+  position: relative;
+  height: 2.5em;
+}
+
+.graph-time-tick {
+  width: 1px;
+  height: 6px;
+  margin-top: 2px;
+  background: #111;
+}
+
+.graph-clocks, .graph-tags {
+  position: relative;
+  height: 160px;
+}
+
+.graph-plays-line,
+.graph-tag-lines {
+  position: relative;
+  height: 200px;
+}

@@ -1,6 +1,5 @@
 import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
-import type { Database } from "@db-types";
 import * as zod from "zod";
 import {
   GetUserRequest,
@@ -8,6 +7,7 @@ import {
   type UserInfo,
 } from "shared/User.ts";
 import { LastFmApi } from "lastfm/api.ts";
+import { Database } from "shared/Database.ts";
 
 export default {
   fetch: withSupabase<Database>({ auth: "none" }, async (req, ctx) => {
@@ -23,8 +23,7 @@ export default {
       }
       const { name: requestName } = result.data;
 
-      const client = ctx.supabase;
-      const data = await client.from("users")
+      const data = await ctx.supabase.from("users")
         .select("user, last_refreshed, url").eq("user", requestName)
         .maybeSingle();
       if (data.error) {
@@ -51,7 +50,7 @@ export default {
         }
         const userInfo = res.lfm.user;
 
-        const insertData = await client.from("users").insert({
+        const insertData = await ctx.supabaseAdmin.from("users").insert({
           user: userInfo.name,
           url: userInfo.url,
         }).select().single();

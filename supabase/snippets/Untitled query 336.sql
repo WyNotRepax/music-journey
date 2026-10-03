@@ -1,0 +1,1 @@
+SELECT trunc_day as date, hour, sum(count) as count from listening_clock  where "user" = 'Gnedby' group by listening_clock.trunc_day, hour

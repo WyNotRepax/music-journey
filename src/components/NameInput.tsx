@@ -1,19 +1,21 @@
-import { useCallback, useState, type ChangeEvent } from "react";
+import { useState } from "react";
 
 export default function NameInput({
+  name,
   onNameChanged,
 }: {
-  onNameChanged?: (name: string) => void;
+  name: string;
+  onNameChanged: (name: string) => void;
 }) {
-  const [name, setName] = useState<string>("");
+  const [inputName, setInputName] = useState(name);
 
-  const onChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value ?? ""),
-    [],
+  return (
+    <input
+      id="lastfm-name"
+      type="text"
+      value={inputName}
+      onChange={(event) => setInputName(event.target.value)}
+      onBlur={() => onNameChanged(inputName.trim())}
+    />
   );
-  const onBlur = useCallback(
-    () => onNameChanged?.(name),
-    [name, onNameChanged],
-  );
-  return <input type="text" value={name} onChange={onChange} onBlur={onBlur} />;
 }
